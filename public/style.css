@@ -1,98 +1,158 @@
+/* Fonte e reset básico */
 body {
     font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
     transition: background 0.3s, color 0.3s;
 }
 
-.chat-container {
-    max-width: 500px;
-    margin: 20px auto;
-    background: white;
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background: #6200ea;
+/* Modo Escuro */
+.dark-mode {
+    background-color: #121212;
     color: white;
-    border-radius: 8px 8px 0 0;
 }
 
-#chatBox {
-    height: 400px;
-    overflow-y: auto;
-    padding: 10px;
-    background: #f9f9f9;
-    border-bottom: 1px solid #ddd;
-}
-
-.message {
-    padding: 5px;
-    margin-bottom: 5px;
-    border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-}
-
-.message:hover .reply {
-    display: inline;
-}
-
-.mention {
-    color: #FFD700;
+/* Estilização do cabeçalho */
+header {
+    background: #007bff;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    font-size: 24px;
     font-weight: bold;
 }
 
+/* Botão de Modo Escuro/Claro */
+#toggle-dark-mode {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+/* Área do chat */
+.chat-container {
+    width: 90%;
+    max-width: 600px;
+    margin: auto;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    overflow: hidden;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilização da área de mensagens */
+#messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 10px;
+    max-height: 400px;
+}
+
+/* Cada mensagem */
+.message {
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    width: fit-content;
+    max-width: 80%;
+    position: relative;
+}
+
+/* Mensagens do usuário atual */
+.message.self {
+    background: #007bff;
+    color: white;
+    margin-left: auto;
+}
+
+/* Mensagens de outros usuários */
+.message.other {
+    background: #f1f1f1;
+    color: black;
+}
+
+/* Nome do remetente */
+.message .username {
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 3px;
+    display: block;
+}
+
+/* Input e botão de envio */
 .input-container {
     display: flex;
     padding: 10px;
+    border-top: 1px solid #ddd;
 }
 
-input {
-    flex: 1;
-    padding: 8px;
-    border: 1px solid #ddd;
+#message-input {
+    flex-grow: 1;
+    padding: 10px;
     border-radius: 5px;
+    border: 1px solid #ddd;
+    outline: none;
 }
 
-button {
-    padding: 8px 15px;
-    background: #6200ea;
+#send-button {
+    background: #007bff;
     color: white;
     border: none;
-    border-radius: 5px;
+    padding: 10px;
     cursor: pointer;
+    margin-left: 5px;
 }
 
-button:hover {
-    background: #4500b5;
+/* Ícone de resposta */
+.reply-button {
+    position: absolute;
+    right: -25px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s;
 }
 
-/* Dark Mode */
-.dark-mode {
-    background: #121212;
-    color: white;
+/* Aparece ao passar o mouse */
+.message:hover .reply-button {
+    opacity: 1;
 }
 
-.dark-mode .chat-container {
-    background: #1e1e1e;
+/* Estilo da mensagem respondida */
+.replied-message {
+    font-size: 12px;
+    color: #555;
+    background: #ddd;
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    display: inline-block;
 }
 
-.dark-mode #chatBox {
-    background: #2a2a2a;
-}
+/* Responsividade */
+@media (max-width: 600px) {
+    .chat-container {
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+    }
 
-.dark-mode .message {
-    background-color: rgba(255, 255, 255, 0.1);
-}
+    #messages {
+        max-height: calc(100vh - 110px);
+    }
 
-.dark-mode .mention {
-    color: #FFA500;
+    #toggle-dark-mode {
+        right: 10px;
+    }
 }
