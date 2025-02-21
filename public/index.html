@@ -1,24 +1,23 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LittleCandys - Chat</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>LittleCandys Chat</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
     <div class="chat-container">
-        <header>LittleCandys</header>
-        
-        <div class="chat-box" id="chat-box"></div>
-        
-        <div class="chat-input">
-            <input type="text" id="message-input" placeholder="Digite sua mensagem...">
-            <button onclick="sendMessage()">➤</button>
+        <header>
+            <h1>LittleCandys</h1>
+            <button id="themeToggle">🌙</button>
+        </header>
+        <div id="chatBox"></div>
+        <div class="input-container">
+            <input type="text" id="message" placeholder="Digite uma mensagem...">
+            <button id="sendButton">Enviar</button>
         </div>
     </div>
-
     <script src="/socket.io/socket.io.js"></script>
     <script src="script.js"></script>
 </body>
