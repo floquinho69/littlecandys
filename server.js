@@ -1,12 +1,19 @@
 const express = require("express");
 const http = require("http");
 const socketIo = require("socket.io");
+const cors = require("cors");
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIo(server);
+const io = socketIo(server, {
+    cors: {
+        origin: "https://phelbox.netlify.app", // Permite conexão do frontend hospedado no Netlify
+        methods: ["GET", "POST"]
+    }
+});
 
 app.use(express.static("public"));
+app.use(cors());
 
 io.on("connection", (socket) => {
     console.log("Novo usuário conectado!");
@@ -20,6 +27,7 @@ io.on("connection", (socket) => {
     });
 });
 
-server.listen(3000, () => {
-    console.log("Servidor rodando na porta 3000");
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+    console.log(`Servidor rodando na porta ${PORT}`);
 });
