@@ -8,24 +8,36 @@ const io = socketIo(server);
 
 app.use(express.static("public"));
 
-const users = {}; // Guardar os usuários conectados
+const users = {}; // Armazena usuários conectados
 
 io.on("connection", (socket) => {
     console.log("Novo usuário conectado!");
 
-    socket.on("join", (username) => {
+    // Registrar nome do usuário
+    socket.on("register", (username) => {
         users[socket.id] = username;
-        io.emit("message", { username: "Sistema", message: `${username} entrou na conversa.` });
+        io.emit("message", { 
+            username: "Sistema", 
+            text: `${username} entrou na conversa`, 
+            system: true 
+        });
     });
 
+    // Mensagem enviada
     socket.on("message", (data) => {
-        io.emit("message", data); // Envia a mensagem para todos
+        io.emit("message", data);
     });
 
+    // Desconexão do usuário
     socket.on("disconnect", () => {
-        const username = users[socket.id] || "Usuário";
-        io.emit("message", { username: "Sistema", message: `${username} saiu da conversa.` });
-        delete users[socket.id];
+        if (users[socket.id]) {
+            io.emit("message", { 
+                username: "Sistema", 
+                text: `${users[socket.id]} saiu da conversa`, 
+                system: true 
+            });
+            delete users[socket.id];
+        }
         console.log("Usuário desconectado!");
     });
 });
