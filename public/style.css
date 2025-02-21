@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Coolvetica&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Coolvetica', sans-serif;
     background-color: #f0f0f0;
     transition: background 0.3s, color 0.3s;
     margin: 0;
@@ -57,62 +59,35 @@ header {
     max-height: 400px;
 }
 
-/* Cada mensagem */
-.message {
-    padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    width: fit-content;
-    max-width: 80%;
-    position: relative;
+/* Input e Botão */
+.input-container {
+    display: flex;
+    gap: 10px;
 }
 
-/* Mensagens do usuário */
-.message.self {
+#message-input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 25px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+/* Botão de Enviar */
+#send-button {
     background: #007bff;
     color: white;
-    margin-left: auto;
-}
-
-/* Mensagens de outros */
-.message.other {
-    background: #f1f1f1;
-    color: black;
-}
-
-/* Nome */
-.message .username {
-    font-size: 12px;
-    font-weight: bold;
-    margin-bottom: 3px;
-    display: block;
-}
-
-/* Ícone de resposta */
-.reply-button {
-    position: absolute;
-    right: -25px;
-    top: 50%;
-    transform: translateY(-50%);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
     cursor: pointer;
-    font-size: 14px;
-    opacity: 0;
-    transition: opacity 0.3s;
+    font-size: 16px;
+    transition: background 0.3s;
+    font-weight: bold;
 }
 
-.message:hover .reply-button {
-    opacity: 1;
-}
-
-/* Mensagem respondida */
-.replied-message {
-    font-size: 12px;
-    color: #555;
-    background: #ddd;
-    padding: 5px;
-    border-radius: 5px;
-    margin-bottom: 5px;
-    display: inline-block;
+#send-button:hover {
+    background: #0056b3;
 }
 
 /* Responsividade */
@@ -121,5 +96,14 @@ header {
         width: 100%;
         height: 100vh;
         border-radius: 0;
+    }
+
+    .input-container {
+        flex-direction: column;
+    }
+
+    #send-button {
+        width: 100%;
+        padding: 12px;
     }
 }
