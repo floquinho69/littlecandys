@@ -1,10 +1,9 @@
-/* Fonte e reset básico */
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
+    transition: background 0.3s, color 0.3s;
     margin: 0;
     padding: 0;
-    transition: background 0.3s, color 0.3s;
 }
 
 /* Modo Escuro */
@@ -13,7 +12,7 @@ body {
     color: white;
 }
 
-/* Estilização do cabeçalho */
+/* Cabeçalho */
 header {
     background: #007bff;
     color: white;
@@ -21,9 +20,10 @@ header {
     padding: 15px;
     font-size: 24px;
     font-weight: bold;
+    position: relative;
 }
 
-/* Botão de Modo Escuro/Claro */
+/* Botão Dark Mode */
 #toggle-dark-mode {
     position: absolute;
     top: 15px;
@@ -34,7 +34,7 @@ header {
     font-size: 20px;
 }
 
-/* Área do chat */
+/* Chat */
 .chat-container {
     width: 90%;
     max-width: 600px;
@@ -49,7 +49,7 @@ header {
     flex-direction: column;
 }
 
-/* Estilização da área de mensagens */
+/* Mensagens */
 #messages {
     flex-grow: 1;
     overflow-y: auto;
@@ -67,49 +67,25 @@ header {
     position: relative;
 }
 
-/* Mensagens do usuário atual */
+/* Mensagens do usuário */
 .message.self {
     background: #007bff;
     color: white;
     margin-left: auto;
 }
 
-/* Mensagens de outros usuários */
+/* Mensagens de outros */
 .message.other {
     background: #f1f1f1;
     color: black;
 }
 
-/* Nome do remetente */
+/* Nome */
 .message .username {
     font-size: 12px;
     font-weight: bold;
     margin-bottom: 3px;
     display: block;
-}
-
-/* Input e botão de envio */
-.input-container {
-    display: flex;
-    padding: 10px;
-    border-top: 1px solid #ddd;
-}
-
-#message-input {
-    flex-grow: 1;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    outline: none;
-}
-
-#send-button {
-    background: #007bff;
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    margin-left: 5px;
 }
 
 /* Ícone de resposta */
@@ -124,12 +100,11 @@ header {
     transition: opacity 0.3s;
 }
 
-/* Aparece ao passar o mouse */
 .message:hover .reply-button {
     opacity: 1;
 }
 
-/* Estilo da mensagem respondida */
+/* Mensagem respondida */
 .replied-message {
     font-size: 12px;
     color: #555;
@@ -146,13 +121,5 @@ header {
         width: 100%;
         height: 100vh;
         border-radius: 0;
-    }
-
-    #messages {
-        max-height: calc(100vh - 110px);
-    }
-
-    #toggle-dark-mode {
-        right: 10px;
     }
 }
