@@ -1,42 +1,27 @@
-const socket = io();
-const chatBox = document.getElementById("chat-box");
-const messageInput = document.getElementById("message-input");
+const socket = io("https://seu-backend.onrender.com"); // Altere para a URL do backend hospedado
 
-let username = prompt("Digite seu nome (Mac, Caio, BlackMetal, Frank):") || "Anônimo";
+document.getElementById("sendButton").addEventListener("click", sendMessage);
+document.getElementById("message").addEventListener("keypress", function(event) {
+    if (event.key === "Enter") sendMessage();
+});
 
 function sendMessage() {
-    const messageText = messageInput.value.trim();
-
-    if (messageText === "") return;
-
-    const messageData = {
-        username: username,
-        message: messageText
-    };
-
-    socket.emit("message", messageData);
-
-    messageInput.value = "";
+    const username = document.getElementById("username").value || "Anônimo";
+    const message = document.getElementById("message").value.trim();
+    
+    if (message !== "") {
+        socket.emit("message", { username, message }); // Envia mensagem para o servidor
+        document.getElementById("message").value = ""; // Limpa o campo após enviar
+    }
 }
 
 socket.on("message", (data) => {
-    const messageElement = document.createElement("div");
-    messageElement.classList.add("message");
-
-    if (data.username === username) {
-        messageElement.classList.add("sent");
-    } else {
-        messageElement.classList.add("received");
-    }
-
-    messageElement.innerHTML = `<div class="username">${data.username}</div>${data.message}`;
-
-    chatBox.appendChild(messageElement);
-    chatBox.scrollTop = chatBox.scrollHeight;
-});
-
-messageInput.addEventListener("keypress", (event) => {
-    if (event.key === "Enter") {
-        sendMessage();
-    }
+    const chatBox = document.getElementById("chatBox");
+    const newMessage = document.createElement("div");
+    
+    newMessage.classList.add("message");
+    newMessage.innerHTML = `<strong>${data.username}:</strong> ${data.message}`;
+    
+    chatBox.appendChild(newMessage);
+    chatBox.scrollTop = chatBox.scrollHeight; // Rolagem automática para mensagens novas
 });
